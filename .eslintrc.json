@@ -10,6 +10,7 @@
   },
   "rules": {
     "linebreak-style": "off",
-    "quotes": "off"
+    "quotes": "off",
+    "no-console": "off"
   }
 }
