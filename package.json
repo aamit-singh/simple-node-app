@@ -4,7 +4,8 @@
   "description": "a simple node app ",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon app.js",
+    "dev-basic": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/aamit-singh/simple-node-app#readme",
   "dependencies": {
+    "ejs": "^3.1.3",
     "express": "^4.17.1"
   },
   "devDependencies": {

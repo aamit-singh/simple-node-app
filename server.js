@@ -129,5 +129,8 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(4200, "localhost", () => {
-  console.log("listening on port 4200 ", osVars);
+  console.log("simple http server listening on port 4200 ", osVars);
 });
+
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
