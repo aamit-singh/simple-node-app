@@ -1,9 +1,12 @@
 const os = require("os");
 const fs = require("fs");
-const express = require("express");
 
 // Using os variables
-const osVars = { platform: os.platform(), homeDir: os.homedir() };
+const osVars = {
+  platform: os.platform(),
+  homeDir: os.homedir(),
+  architecture: os.arch(),
+};
 
 // Using file System ---
 
@@ -49,8 +52,9 @@ if (!fs.existsSync("./files/dir")) {
   fs.rmdir("./files/dir", (err) => {
     if (err) {
       console.log(err);
+    } else {
+      console.log("dir folder deleted");
     }
-    console.log("dir folder deleted");
   });
 }
 
@@ -71,17 +75,59 @@ const writeStream = fs.createWriteStream("./files/test2.txt");
 // alternate copying technique
 readStream.pipe(writeStream);
 
-// ----------------------------------------------------
-// ----------------------------------------------------
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 
-// Express App
+// Server with http module
 
-const app = express();
+const http = require("http");
 
-app.use("/", (req, res) => {
-  res.send("The server is running here.");
+const server = http.createServer((req, res) => {
+  console.log("Request made.");
+
+  // set Header
+  res.setHeader("Content-type", "text/html");
+
+  // sending data with res.write
+  // res.write("<h2>hello world!</h2>");
+  // res.write("<p>hello world! Again</p>");
+  // res.end("<p> end line </p>");
+
+  // basic routing
+  let path = "./views/";
+  switch (req.url) {
+    case "/":
+      path += "index.html";
+      res.statusCode = 200;
+      break;
+    case "/about":
+      path += "about.html";
+      res.statusCode = 200;
+      break;
+    case "/about-me":
+      res.setHeader("Location", "/about");
+      res.statusCode = 301;
+      res.end();
+      break;
+    default:
+      path += "404.html";
+      res.statusCode = 404;
+      break;
+  }
+
+  // Sending html file
+  if (path !== "./views/") {
+    fs.readFile(path, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.end("there was some error");
+      } else {
+        res.end(data);
+      }
+    });
+  }
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`app is running on port ${process.env.PORT || 3000}`, osVars);
+server.listen(4200, "localhost", () => {
+  console.log("listening on port 4200 ", osVars);
 });
