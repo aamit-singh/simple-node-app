@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>A Simple Node App</title>
-    </head>
-    <body>
-        
-        <h1>
-            About
-        </h1>
-        </br>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-        </nav>
-        </br>
-        <p>
-            Hello World! Welcome to the about page.
-        </p>
-    </body>
+  <%- include("./partials/head") %>
+  <body>
+    <header>
+      <h1>
+        About
+      </h1>
+    </header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+    </nav>
+    <section>
+      <p>
+        Hello World! Welcome to the about page.
+      </p>
+    </section>
+  </body>
 </html>

@@ -1,0 +1,26 @@
+body {
+  margin: 0em 1.5em;
+  padding: 0em 2em;
+  background-color: lightcyan;
+}
+
+header {
+  padding: 0.5em 1.5em;
+  background-color: cornflowerblue;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  padding: 0em 1em;
+}
+
+section {
+  padding: 1em 2em;
+  background-color: lightsteelblue;
+  height: 100vh;
+}
+
+a {
+  margin: 0.5em;
+}

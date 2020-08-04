@@ -1,13 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const DbItem = require("./models/dbitem");
+const dbURI = require("./config");
+const DiaryEntry = require("./models/diaryEntry");
 
 // Express App
 const app = express();
 
 // connecting to mongodb
-const dbURI =
-  "mongodb+srv://simple-node-app:Password@cluster0-euwxx.gcp.mongodb.net/test?retryWrites=true&w=majority";
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -18,12 +17,17 @@ mongoose
 
 // middleware
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 
 // register view engine
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  const list = ["car 1", "car 2", "car 3"];
+  const list = [
+    "This is a basic node app",
+    "It uses express and mongoDb",
+    "There is a diary entry service in it.",
+  ];
 
   res.render("index", { name: "Rex", list });
 });
@@ -35,6 +39,23 @@ app.get("/about", (req, res) => {
 // redirects
 app.get("/about-us", (req, res) => {
   res.redirect("/about");
+});
+
+app.get("/create-item", (req, res) => {
+  const item = new DiaryEntry({
+    name: "item 101",
+    count: "2",
+    date: new Date(),
+  });
+  item
+    .save()
+    .then((result) => {
+      console.log(result);
+      res.send("item created succesfully");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // 404 page

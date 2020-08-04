@@ -2,7 +2,7 @@
   "name": "simple-node-app",
   "version": "1.0.0",
   "description": "a simple node app ",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
     "dev-basic": "nodemon server.js",
